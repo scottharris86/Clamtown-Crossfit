@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WorkoutsFeedCollectionViewController.swift
 //  Clamtown Crossfit
 //
 //  Created by scott harris on 4/27/20.
@@ -8,13 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class WorkoutsFeedCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
 }
-

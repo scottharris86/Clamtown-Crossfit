@@ -9,21 +9,21 @@
 /* Begin PBXBuildFile section */
 		D24C92F72457227900217AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C92F62457227900217AEC /* AppDelegate.swift */; };
 		D24C92F92457227900217AEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C92F82457227900217AEC /* SceneDelegate.swift */; };
-		D24C92FB2457227900217AEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C92FA2457227900217AEC /* ViewController.swift */; };
-		D24C92FE2457227900217AEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24C92FC2457227900217AEC /* Main.storyboard */; };
 		D24C93002457227A00217AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24C92FF2457227A00217AEC /* Assets.xcassets */; };
 		D24C93032457227A00217AEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24C93012457227A00217AEC /* LaunchScreen.storyboard */; };
+		D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C930B2457682000217AEC /* MainNavigationController.swift */; };
+		D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D24C92F32457227900217AEC /* Clamtown Crossfit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clamtown Crossfit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24C92F62457227900217AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D24C92F82457227900217AEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D24C92FA2457227900217AEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D24C92FD2457227900217AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D24C92FF2457227A00217AEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D24C93022457227A00217AEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D24C93042457227A00217AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D24C930B2457682000217AEC /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsFeedCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +56,23 @@
 		D24C92F52457227900217AEC /* Clamtown Crossfit */ = {
 			isa = PBXGroup;
 			children = (
+				D24C930A245767FE00217AEC /* View Controllers */,
 				D24C92F62457227900217AEC /* AppDelegate.swift */,
 				D24C92F82457227900217AEC /* SceneDelegate.swift */,
-				D24C92FA2457227900217AEC /* ViewController.swift */,
-				D24C92FC2457227900217AEC /* Main.storyboard */,
 				D24C92FF2457227A00217AEC /* Assets.xcassets */,
 				D24C93012457227A00217AEC /* LaunchScreen.storyboard */,
 				D24C93042457227A00217AEC /* Info.plist */,
 			);
 			path = "Clamtown Crossfit";
+			sourceTree = "<group>";
+		};
+		D24C930A245767FE00217AEC /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D24C930B2457682000217AEC /* MainNavigationController.swift */,
+				D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +135,6 @@
 			files = (
 				D24C93032457227A00217AEC /* LaunchScreen.storyboard in Resources */,
 				D24C93002457227A00217AEC /* Assets.xcassets in Resources */,
-				D24C92FE2457227900217AEC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D24C92FB2457227900217AEC /* ViewController.swift in Sources */,
+				D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */,
 				D24C92F72457227900217AEC /* AppDelegate.swift in Sources */,
+				D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */,
 				D24C92F92457227900217AEC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +155,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D24C92FC2457227900217AEC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D24C92FD2457227900217AEC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D24C93012457227A00217AEC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
