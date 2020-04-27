@@ -13,6 +13,7 @@
 		D24C93032457227A00217AEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D24C93012457227A00217AEC /* LaunchScreen.storyboard */; };
 		D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C930B2457682000217AEC /* MainNavigationController.swift */; };
 		D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */; };
+		D24C931324576C4000217AEC /* WorkoutFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C931224576C4000217AEC /* WorkoutFeedCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D24C93042457227A00217AEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D24C930B2457682000217AEC /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsFeedCollectionViewController.swift; sourceTree = "<group>"; };
+		D24C931224576C4000217AEC /* WorkoutFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFeedCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +58,11 @@
 		D24C92F52457227900217AEC /* Clamtown Crossfit */ = {
 			isa = PBXGroup;
 			children = (
+				D24C931024576C1F00217AEC /* Views */,
 				D24C930A245767FE00217AEC /* View Controllers */,
-				D24C92F62457227900217AEC /* AppDelegate.swift */,
-				D24C92F82457227900217AEC /* SceneDelegate.swift */,
+				D24C930F24576B7C00217AEC /* Application */,
 				D24C92FF2457227A00217AEC /* Assets.xcassets */,
 				D24C93012457227A00217AEC /* LaunchScreen.storyboard */,
-				D24C93042457227A00217AEC /* Info.plist */,
 			);
 			path = "Clamtown Crossfit";
 			sourceTree = "<group>";
@@ -73,6 +74,32 @@
 				D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */,
 			);
 			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D24C930F24576B7C00217AEC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				D24C92F62457227900217AEC /* AppDelegate.swift */,
+				D24C92F82457227900217AEC /* SceneDelegate.swift */,
+				D24C93042457227A00217AEC /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		D24C931024576C1F00217AEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D24C931124576C2A00217AEC /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D24C931124576C2A00217AEC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D24C931224576C4000217AEC /* WorkoutFeedCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +175,7 @@
 				D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */,
 				D24C92F72457227900217AEC /* AppDelegate.swift in Sources */,
 				D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */,
+				D24C931324576C4000217AEC /* WorkoutFeedCell.swift in Sources */,
 				D24C92F92457227900217AEC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7SF2KFH336;
-				INFOPLIST_FILE = "Clamtown Crossfit/Info.plist";
+				INFOPLIST_FILE = "Clamtown Crossfit/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7SF2KFH336;
-				INFOPLIST_FILE = "Clamtown Crossfit/Info.plist";
+				INFOPLIST_FILE = "Clamtown Crossfit/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
