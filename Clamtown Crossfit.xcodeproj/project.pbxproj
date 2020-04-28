@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D21145152458F20200A63C47 /* ABS.m4v in Resources */ = {isa = PBXBuildFile; fileRef = D21145132458F20200A63C47 /* ABS.m4v */; };
+		D21145162458F20200A63C47 /* ABS-Short.m4v in Resources */ = {isa = PBXBuildFile; fileRef = D21145142458F20200A63C47 /* ABS-Short.m4v */; };
 		D24C92F72457227900217AEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C92F62457227900217AEC /* AppDelegate.swift */; };
 		D24C92F92457227900217AEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C92F82457227900217AEC /* SceneDelegate.swift */; };
 		D24C93002457227A00217AEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D24C92FF2457227A00217AEC /* Assets.xcassets */; };
@@ -14,9 +16,13 @@
 		D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C930B2457682000217AEC /* MainNavigationController.swift */; };
 		D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */; };
 		D24C931324576C4000217AEC /* WorkoutFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C931224576C4000217AEC /* WorkoutFeedCell.swift */; };
+		D24C9319245885A000217AEC /* FileURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C9318245885A000217AEC /* FileURL.swift */; };
+		D24C931B2458896300217AEC /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C931A2458896300217AEC /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D21145132458F20200A63C47 /* ABS.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = ABS.m4v; path = ../CrossfitMedia/ABS.m4v; sourceTree = "<group>"; };
+		D21145142458F20200A63C47 /* ABS-Short.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = "ABS-Short.m4v"; path = "../CrossfitMedia/ABS-Short.m4v"; sourceTree = "<group>"; };
 		D24C92F32457227900217AEC /* Clamtown Crossfit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Clamtown Crossfit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D24C92F62457227900217AEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D24C92F82457227900217AEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +32,8 @@
 		D24C930B2457682000217AEC /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutsFeedCollectionViewController.swift; sourceTree = "<group>"; };
 		D24C931224576C4000217AEC /* WorkoutFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFeedCell.swift; sourceTree = "<group>"; };
+		D24C9318245885A000217AEC /* FileURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileURL.swift; sourceTree = "<group>"; };
+		D24C931A2458896300217AEC /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,9 +47,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D21145122458F12400A63C47 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D21145142458F20200A63C47 /* ABS-Short.m4v */,
+				D21145132458F20200A63C47 /* ABS.m4v */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		D24C92EA2457227900217AEC = {
 			isa = PBXGroup;
 			children = (
+				D21145122458F12400A63C47 /* Resources */,
 				D24C92F52457227900217AEC /* Clamtown Crossfit */,
 				D24C92F42457227900217AEC /* Products */,
 			);
@@ -58,6 +76,7 @@
 		D24C92F52457227900217AEC /* Clamtown Crossfit */ = {
 			isa = PBXGroup;
 			children = (
+				D24C93172458857A00217AEC /* Helpers */,
 				D24C931024576C1F00217AEC /* Views */,
 				D24C930A245767FE00217AEC /* View Controllers */,
 				D24C930F24576B7C00217AEC /* Application */,
@@ -72,6 +91,7 @@
 			children = (
 				D24C930B2457682000217AEC /* MainNavigationController.swift */,
 				D24C930D2457694200217AEC /* WorkoutsFeedCollectionViewController.swift */,
+				D24C931A2458896300217AEC /* PlayerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -100,6 +120,14 @@
 				D24C931224576C4000217AEC /* WorkoutFeedCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D24C93172458857A00217AEC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D24C9318245885A000217AEC /* FileURL.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +188,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D21145152458F20200A63C47 /* ABS.m4v in Resources */,
+				D21145162458F20200A63C47 /* ABS-Short.m4v in Resources */,
 				D24C93032457227A00217AEC /* LaunchScreen.storyboard in Resources */,
 				D24C93002457227A00217AEC /* Assets.xcassets in Resources */,
 			);
@@ -173,7 +203,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */,
+				D24C9319245885A000217AEC /* FileURL.swift in Sources */,
 				D24C92F72457227900217AEC /* AppDelegate.swift in Sources */,
+				D24C931B2458896300217AEC /* PlayerViewController.swift in Sources */,
 				D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */,
 				D24C931324576C4000217AEC /* WorkoutFeedCell.swift in Sources */,
 				D24C92F92457227900217AEC /* SceneDelegate.swift in Sources */,

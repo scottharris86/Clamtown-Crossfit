@@ -45,6 +45,7 @@ class WorkoutFeedCell: UICollectionViewCell {
         playerPreviewView.image = UIImage(named: "bobs_video_thumbnail")
         contentView.addSubview(playerPreviewView)
         playerPreviewView.translatesAutoresizingMaskIntoConstraints = false
+        playerPreviewView.contentMode = .scaleToFill
         playerPreviewView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
         playerPreviewView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
         playerPreviewView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8).isActive = true

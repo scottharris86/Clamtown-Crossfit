@@ -28,8 +28,15 @@ class WorkoutsFeedCollectionViewController: UICollectionViewController {
         
     }
     
-    
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let playerVC = PlayerViewController()
+        self.navigationController?.addChild(playerVC)
+        playerVC.view.translatesAutoresizingMaskIntoConstraints = false
+        self.navigationController?.view.addSubview(playerVC.view)
+        playerVC.didMove(toParent: self.navigationController)
+        playerVC.minimizePlayer()
+
+    }
 }
 
 extension WorkoutsFeedCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -42,4 +49,5 @@ extension WorkoutsFeedCollectionViewController: UICollectionViewDelegateFlowLayo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
     }
+    
 }
