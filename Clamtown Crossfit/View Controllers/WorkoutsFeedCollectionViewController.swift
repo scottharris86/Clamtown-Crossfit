@@ -11,6 +11,8 @@ import UIKit
 class WorkoutsFeedCollectionViewController: UICollectionViewController {
     
     let cellCount = 5
+    var playerViewController: PlayerViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -28,12 +30,21 @@ class WorkoutsFeedCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let playerVC = PlayerViewController()
-        self.navigationController?.addChild(playerVC)
-        
-        self.navigationController?.view.addSubview(playerVC.view)
-        playerVC.didMove(toParent: self.navigationController)
-        playerVC.showPlayerFullScreen()
+        if let playerVC = playerViewController {
+            let urlHelper = FileURL()
+            let videoURL = urlHelper.resourcesDirectory
+            playerVC.videoURL = videoURL
+        } else {
+            playerViewController = PlayerViewController()
+            self.navigationController?.addChild(playerViewController!)
+            
+            self.navigationController?.view.addSubview(playerViewController!.view)
+            playerViewController!.didMove(toParent: self.navigationController)
+            
+            let urlHelper = FileURL()
+            let videoURL = urlHelper.resourcesDirectory
+            playerViewController!.videoURL = videoURL
+        }
     }
 }
 

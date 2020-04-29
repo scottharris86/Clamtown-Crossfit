@@ -20,15 +20,29 @@ class PlayerViewController: UIViewController {
     var playerLayer: AVPlayerLayer?
     let videoControlsOverlayView = UIView()
     let playPauseButton = UIButton()
-    override func viewWillAppear(_ animated: Bool) {
-        view.frame = parent!.view.bounds
+    var videoURL: URL? {
+        didSet {
+            configurePlayer()
+        }
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        view.frame = parent!.view.bounds
+//    }
+    
     override func viewDidLoad() {
+        guard let parent = self.parent else { return }
+        
+        let frame = CGRect(x: parent.view.frame.size.width - parent.view.safeAreaInsets.right - 150 - 16, y: parent.view.frame.height - parent.view.safeAreaInsets.bottom - (150 * 9 / 16), width: 150, height: 150 * 9 / 16)
+        
+        self.view.frame = frame
         view.backgroundColor = .white
         tempViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapped))
         view.addGestureRecognizer(tempViewTapGesture!)
+        
         setupPlayerView()
+        showPlayerFullScreen()
+        
         
     }
     
@@ -97,28 +111,35 @@ class PlayerViewController: UIViewController {
     }
     
     private func setupPlayerView() {
-        let urlHelper = FileURL()
-        let videoURL = urlHelper.resourcesDirectory
+        view.addSubview(playerView)
+        playerView.translatesAutoresizingMaskIntoConstraints = false
+        playerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        playerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        playerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        playerView.heightAnchor.constraint(equalTo: playerView.widthAnchor, multiplier: 9/16).isActive = true
+        
+        playerView.layoutIfNeeded()
+        
+        playerView.backgroundColor = .black
+        
+        configurePlayer()
+    }
+    
+    private func configurePlayer() {
         if let videoURL = videoURL {
-            player = AVPlayer(url: videoURL)
-            view.addSubview(playerView)
-            playerView.translatesAutoresizingMaskIntoConstraints = false
-            playerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            playerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            playerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            playerView.heightAnchor.constraint(equalTo: playerView.widthAnchor, multiplier: 9/16).isActive = true
-            
-            playerView.layoutIfNeeded()
-            
-            playerView.backgroundColor = .black
-            playerLayer = AVPlayerLayer(player: player)
-            playerView.layer.addSublayer(playerLayer!)
-            playerLayer!.frame = playerView.bounds
-            player?.play()
-            isPlaying = true
-            playPauseButton.isSelected = isPlaying
-            setupVideoControls()
-            
+            if let player = player {
+                let currentItem = AVPlayerItem(url: videoURL)
+                player.replaceCurrentItem(with: currentItem)
+            } else {
+                player = AVPlayer(url: videoURL)
+                playerLayer = AVPlayerLayer(player: player)
+                playerView.layer.addSublayer(playerLayer!)
+                playerLayer!.frame = playerView.bounds
+                player?.play()
+                isPlaying = true
+                playPauseButton.isSelected = isPlaying
+                setupVideoControls()
+            }
         }
     }
     
