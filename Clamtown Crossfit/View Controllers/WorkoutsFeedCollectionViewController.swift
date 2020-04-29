@@ -9,12 +9,12 @@
 import UIKit
 
 class WorkoutsFeedCollectionViewController: UICollectionViewController {
+    
     let cellCount = 5
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
         collectionView.register(WorkoutFeedCell.self, forCellWithReuseIdentifier: "FeedCell")
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -25,17 +25,15 @@ class WorkoutsFeedCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCell", for: indexPath)
         
         return cell
-        
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let playerVC = PlayerViewController()
         self.navigationController?.addChild(playerVC)
-        playerVC.view.translatesAutoresizingMaskIntoConstraints = false
+        
         self.navigationController?.view.addSubview(playerVC.view)
         playerVC.didMove(toParent: self.navigationController)
-        playerVC.minimizePlayer()
-
+        playerVC.showPlayerFullScreen()
     }
 }
 
