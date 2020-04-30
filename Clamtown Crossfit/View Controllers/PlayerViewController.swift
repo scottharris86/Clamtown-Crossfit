@@ -20,6 +20,9 @@ class PlayerViewController: UIViewController {
     var playerLayer: AVPlayerLayer?
     let videoControlsOverlayView = UIView()
     let playPauseButton = UIButton()
+    let currentTimeLabel = UILabel()
+    let durationLabel = UILabel()
+    let seekSlider = UISlider()
     var videoURL: URL? {
         didSet {
             configurePlayer()
@@ -126,10 +129,13 @@ class PlayerViewController: UIViewController {
     }
     
     private func configurePlayer() {
+//        player?.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges")
         if let videoURL = videoURL {
             if let player = player {
                 let currentItem = AVPlayerItem(url: videoURL)
                 player.replaceCurrentItem(with: currentItem)
+//                player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+                
             } else {
                 player = AVPlayer(url: videoURL)
                 playerLayer = AVPlayerLayer(player: player)
@@ -139,7 +145,45 @@ class PlayerViewController: UIViewController {
                 isPlaying = true
                 playPauseButton.isSelected = isPlaying
                 setupVideoControls()
+                player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+//                if let duration = player?.currentItem?.duration {
+//                    let seconds = CMTimeGetSeconds(duration)
+//                    let secondsInt = Int(seconds) % 60
+//                    let minutes = Int(seconds) / 60
+//                    let secondsText = secondsInt > 0 ? "\(secondsInt)" : "00"
+//
+//                    let minutesText = minutes > 0 ? "\(minutes)" : "00"
+//
+//                    durationLabel.text = "\(minutesText):\(secondsText)"
+//                }
+//                durationLabel.text = player!.currentItem!.duration.positionalTime
             }
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        // this is when the player is ready and rendering frames
+        if keyPath == "currentItem.loadedTimeRanges" {
+//            activityIndicatorView.stopAnimating()
+//            controlsContainerView.backgroundColor = .clear
+//            pausePlayButton.isHidden = false
+            isPlaying = true
+            
+            if let duration = player?.currentItem?.duration {
+                let seconds = CMTimeGetSeconds(duration)
+                if !seconds.isNaN {
+                    let secondsInt = Int(seconds) % 60
+                    let minutes = Int(seconds) / 60
+                    let secondsText = secondsInt > 0 ? "\(secondsInt)" : "00"
+                    
+                    let minutesText = minutes > 0 ? "\(minutes)" : "00"
+                    
+                    durationLabel.text = "\(minutesText):\(secondsText)"
+                }
+                
+            }
+            
         }
     }
     
@@ -155,6 +199,7 @@ class PlayerViewController: UIViewController {
         videoControlsTapGuesture = UITapGestureRecognizer(target: self, action: #selector(handleControlsTapped))
         playerView.addGestureRecognizer(videoControlsTapGuesture!)
         setupPlayButton()
+        setupSeekControls()
         
     }
     
@@ -176,6 +221,28 @@ class PlayerViewController: UIViewController {
 
     }
     
+    private func setupSeekControls() {
+        durationLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        durationLabel.textColor = .white
+        currentTimeLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        currentTimeLabel.textColor = .white
+        currentTimeLabel.text = "00:00"
+        videoControlsOverlayView.addSubview(currentTimeLabel)
+        videoControlsOverlayView.addSubview(durationLabel)
+        videoControlsOverlayView.addSubview(seekSlider)
+        currentTimeLabel.translatesAutoresizingMaskIntoConstraints = false
+        durationLabel.translatesAutoresizingMaskIntoConstraints = false
+        seekSlider.translatesAutoresizingMaskIntoConstraints = false
+        durationLabel.bottomAnchor.constraint(equalTo: videoControlsOverlayView.bottomAnchor, constant: -8).isActive = true
+        durationLabel.trailingAnchor.constraint(equalTo: videoControlsOverlayView.trailingAnchor, constant: -8).isActive = true
+        currentTimeLabel.bottomAnchor.constraint(equalTo: videoControlsOverlayView.bottomAnchor, constant: -8).isActive = true
+        currentTimeLabel.leadingAnchor.constraint(equalTo: videoControlsOverlayView.leadingAnchor, constant: 8).isActive = true
+        seekSlider.leadingAnchor.constraint(equalTo: currentTimeLabel.trailingAnchor, constant: 16).isActive = true
+        seekSlider.trailingAnchor.constraint(equalTo: durationLabel.leadingAnchor, constant: -16).isActive = true
+        seekSlider.bottomAnchor.constraint(equalTo: videoControlsOverlayView.bottomAnchor).isActive = true
+        
+    }
+    
     @objc private func playTapped() {
         if isPlaying {
             player?.pause()
@@ -185,5 +252,21 @@ class PlayerViewController: UIViewController {
         
         playPauseButton.isSelected.toggle()
         isPlaying.toggle()
+    }
+}
+
+extension CMTime {
+    var roundedSeconds: TimeInterval {
+        return seconds.rounded()
+    }
+    var hours:  Int { return Int(roundedSeconds / 3600) }
+    var minute: Int { return Int(roundedSeconds.truncatingRemainder(dividingBy: 3600) / 60) }
+    var second: Int { return Int(roundedSeconds.truncatingRemainder(dividingBy: 60)) }
+    var positionalTime: String {
+        return hours > 0 ?
+            String(format: "%d:%02d:%02d",
+                   hours, minute, second) :
+            String(format: "%02d:%02d",
+                   minute, second)
     }
 }
