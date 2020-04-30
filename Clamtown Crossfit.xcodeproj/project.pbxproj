@@ -18,6 +18,10 @@
 		D24C931324576C4000217AEC /* WorkoutFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C931224576C4000217AEC /* WorkoutFeedCell.swift */; };
 		D24C9319245885A000217AEC /* FileURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C9318245885A000217AEC /* FileURL.swift */; };
 		D24C931B2458896300217AEC /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C931A2458896300217AEC /* PlayerViewController.swift */; };
+		D2C6416F245B70B2001C6A2E /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C6416E245B70B2001C6A2E /* Workout.swift */; };
+		D2C64171245B713A001C6A2E /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C64170245B713A001C6A2E /* Coach.swift */; };
+		D2C64174245B726E001C6A2E /* FireBaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C64173245B726E001C6A2E /* FireBaseAPIClient.swift */; };
+		D2C64177245B7684001C6A2E /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C64176245B7684001C6A2E /* WorkoutController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		D24C931224576C4000217AEC /* WorkoutFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutFeedCell.swift; sourceTree = "<group>"; };
 		D24C9318245885A000217AEC /* FileURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileURL.swift; sourceTree = "<group>"; };
 		D24C931A2458896300217AEC /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		D2C6416E245B70B2001C6A2E /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		D2C64170245B713A001C6A2E /* Coach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
+		D2C64173245B726E001C6A2E /* FireBaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseAPIClient.swift; sourceTree = "<group>"; };
+		D2C64176245B7684001C6A2E /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +84,9 @@
 		D24C92F52457227900217AEC /* Clamtown Crossfit */ = {
 			isa = PBXGroup;
 			children = (
+				D2C64175245B766B001C6A2E /* Model Controllers */,
+				D2C64172245B7240001C6A2E /* API */,
+				D2C6416D245B709C001C6A2E /* Models */,
 				D24C93172458857A00217AEC /* Helpers */,
 				D24C931024576C1F00217AEC /* Views */,
 				D24C930A245767FE00217AEC /* View Controllers */,
@@ -128,6 +139,31 @@
 				D24C9318245885A000217AEC /* FileURL.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D2C6416D245B709C001C6A2E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2C6416E245B70B2001C6A2E /* Workout.swift */,
+				D2C64170245B713A001C6A2E /* Coach.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D2C64172245B7240001C6A2E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D2C64173245B726E001C6A2E /* FireBaseAPIClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		D2C64175245B766B001C6A2E /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D2C64176245B7684001C6A2E /* WorkoutController.swift */,
+			);
+			path = "Model Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,10 +240,14 @@
 			files = (
 				D24C930C2457682000217AEC /* MainNavigationController.swift in Sources */,
 				D24C9319245885A000217AEC /* FileURL.swift in Sources */,
+				D2C64174245B726E001C6A2E /* FireBaseAPIClient.swift in Sources */,
 				D24C92F72457227900217AEC /* AppDelegate.swift in Sources */,
+				D2C6416F245B70B2001C6A2E /* Workout.swift in Sources */,
 				D24C931B2458896300217AEC /* PlayerViewController.swift in Sources */,
+				D2C64177245B7684001C6A2E /* WorkoutController.swift in Sources */,
 				D24C930E2457694200217AEC /* WorkoutsFeedCollectionViewController.swift in Sources */,
 				D24C931324576C4000217AEC /* WorkoutFeedCell.swift in Sources */,
+				D2C64171245B713A001C6A2E /* Coach.swift in Sources */,
 				D24C92F92457227900217AEC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

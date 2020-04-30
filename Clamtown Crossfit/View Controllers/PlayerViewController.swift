@@ -29,10 +29,6 @@ class PlayerViewController: UIViewController {
         }
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        view.frame = parent!.view.bounds
-//    }
-    
     override func viewDidLoad() {
         guard let parent = self.parent else { return }
         
@@ -45,8 +41,7 @@ class PlayerViewController: UIViewController {
         
         setupPlayerView()
         showPlayerFullScreen()
-        
-        
+
     }
     
     func showPlayerFullScreen() {
@@ -67,9 +62,6 @@ class PlayerViewController: UIViewController {
         }, completion: {(finished) in
             if let controls = self.videoControlsTapGuesture {
                 self.playerView.addGestureRecognizer(controls)
-            }
-            if !self.isPlaying {
-//               self.setupPlayerView()
             }
             
         })
@@ -106,11 +98,7 @@ class PlayerViewController: UIViewController {
             self.playerView.removeGestureRecognizer(self.videoControlsTapGuesture!)
             self.videoControlsOverlayView.isHidden = true
             
-        }, completion: { (finsihed) in
-            if !self.isPlaying {
-//                self.setupPlayerView()
-            }
-        })
+        }, completion: nil)
     }
     
     private func setupPlayerView() {
@@ -129,12 +117,10 @@ class PlayerViewController: UIViewController {
     }
     
     private func configurePlayer() {
-//        player?.removeObserver(self, forKeyPath: "currentItem.loadedTimeRanges")
         if let videoURL = videoURL {
             if let player = player {
                 let currentItem = AVPlayerItem(url: videoURL)
                 player.replaceCurrentItem(with: currentItem)
-//                player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
                 
             } else {
                 player = AVPlayer(url: videoURL)
@@ -146,17 +132,7 @@ class PlayerViewController: UIViewController {
                 playPauseButton.isSelected = isPlaying
                 setupVideoControls()
                 player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
-//                if let duration = player?.currentItem?.duration {
-//                    let seconds = CMTimeGetSeconds(duration)
-//                    let secondsInt = Int(seconds) % 60
-//                    let minutes = Int(seconds) / 60
-//                    let secondsText = secondsInt > 0 ? "\(secondsInt)" : "00"
-//
-//                    let minutesText = minutes > 0 ? "\(minutes)" : "00"
-//
-//                    durationLabel.text = "\(minutesText):\(secondsText)"
-//                }
-//                durationLabel.text = player!.currentItem!.duration.positionalTime
+
             }
         }
     }
@@ -165,9 +141,6 @@ class PlayerViewController: UIViewController {
         
         // this is when the player is ready and rendering frames
         if keyPath == "currentItem.loadedTimeRanges" {
-//            activityIndicatorView.stopAnimating()
-//            controlsContainerView.backgroundColor = .clear
-//            pausePlayButton.isHidden = false
             isPlaying = true
             
             if let duration = player?.currentItem?.duration {
@@ -252,21 +225,5 @@ class PlayerViewController: UIViewController {
         
         playPauseButton.isSelected.toggle()
         isPlaying.toggle()
-    }
-}
-
-extension CMTime {
-    var roundedSeconds: TimeInterval {
-        return seconds.rounded()
-    }
-    var hours:  Int { return Int(roundedSeconds / 3600) }
-    var minute: Int { return Int(roundedSeconds.truncatingRemainder(dividingBy: 3600) / 60) }
-    var second: Int { return Int(roundedSeconds.truncatingRemainder(dividingBy: 60)) }
-    var positionalTime: String {
-        return hours > 0 ?
-            String(format: "%d:%02d:%02d",
-                   hours, minute, second) :
-            String(format: "%02d:%02d",
-                   minute, second)
     }
 }
