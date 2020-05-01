@@ -9,9 +9,8 @@
 import UIKit
 
 class WorkoutsFeedCollectionViewController: UICollectionViewController {
-    
-    let cellCount = 5
-    var playerViewController: PlayerViewController?
+
+    weak var playerViewController: PlayerViewController?
     let workoutController = WorkoutController()
     
     override func viewDidLoad() {
@@ -60,9 +59,9 @@ class WorkoutsFeedCollectionViewController: UICollectionViewController {
             let videoURL = workoutController.workouts[indexPath.item].videoURL
             playerVC.videoURL = videoURL
         } else {
-            playerViewController = PlayerViewController()
-            self.navigationController?.addChild(playerViewController!)
-            
+            let playerVC = PlayerViewController()
+            self.navigationController?.addChild(playerVC)
+            playerViewController = playerVC
             self.navigationController?.view.addSubview(playerViewController!.view)
             playerViewController!.didMove(toParent: self.navigationController)
             

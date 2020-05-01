@@ -13,6 +13,7 @@ class PlayerViewController: UIViewController {
     
     var tempViewTapGesture: UITapGestureRecognizer?
     var videoControlsTapGuesture: UITapGestureRecognizer?
+    var panGuestureRecognizer: UIPanGestureRecognizer?
     var isMinimized: Bool = false
     var player: AVPlayer?
     var isPlaying: Bool = false
@@ -35,6 +36,7 @@ class PlayerViewController: UIViewController {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         return formatter
     }()
+    var initialCenter = CGPoint()
     
     override func viewDidLoad() {
         guard let parent = self.parent else { return }
@@ -70,6 +72,9 @@ class PlayerViewController: UIViewController {
             if let controls = self.videoControlsTapGuesture {
                 self.playerView.addGestureRecognizer(controls)
             }
+            if let pan = self.panGuestureRecognizer {
+                self.view.removeGestureRecognizer(pan)
+            }
             
         })
     }
@@ -103,9 +108,52 @@ class PlayerViewController: UIViewController {
             self.playerView.frame = playerFrame
             self.playerLayer?.frame = playerFrame
             self.playerView.removeGestureRecognizer(self.videoControlsTapGuesture!)
+            if let panGuestureRecognizer = self.panGuestureRecognizer {
+                self.view.addGestureRecognizer(panGuestureRecognizer)
+            } else {
+                self.panGuestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(self.handlePan))
+                self.view.addGestureRecognizer(self.panGuestureRecognizer!)
+            }
+            
             self.videoControlsOverlayView.isHidden = true
             
         }, completion: nil)
+    }
+    
+    
+    @objc private func handlePan(_ gestureRecognizer : UIPanGestureRecognizer) {
+        guard gestureRecognizer.view != nil else {return}
+        let piece = gestureRecognizer.view!
+        // Get the changes in the X and Y directions relative to
+        // the superview's coordinate space.
+        let translation = gestureRecognizer.translation(in: piece.superview)
+        if gestureRecognizer.state == .began {
+            // Save the view's original position.
+            self.initialCenter = piece.center
+        }
+        // Update the position for the .began, .changed, and .ended states
+        if gestureRecognizer.state != .cancelled {
+            // Add the X and Y translation to the view's original position.
+            let newCenterX = initialCenter.x + translation.x
+            let newCenter = CGPoint(x: newCenterX, y: initialCenter.y + translation.y)
+            if let superview = piece.superview {
+                if newCenterX > superview.bounds.maxX {
+                    player?.pause()
+                    player = nil
+                    self.willMove(toParent: nil)
+                    self.view.removeFromSuperview()
+                    self.removeFromParent()
+                    dismiss(animated: false, completion: nil)
+                    return
+                }
+            }
+            
+            piece.center = newCenter
+        }
+        else {
+            // On cancellation, return the piece to its original location.
+            piece.center = initialCenter
+        }
     }
     
     private func setupPlayerView() {
