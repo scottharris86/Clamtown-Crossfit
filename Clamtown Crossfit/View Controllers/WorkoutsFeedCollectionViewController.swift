@@ -15,7 +15,7 @@ class WorkoutsFeedCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGray6
         collectionView.register(WorkoutFeedCell.self, forCellWithReuseIdentifier: "FeedCell")
         workoutController.getAllWorkouts {
             DispatchQueue.main.async {

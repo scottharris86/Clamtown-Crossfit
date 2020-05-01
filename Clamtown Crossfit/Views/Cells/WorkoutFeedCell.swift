@@ -17,7 +17,7 @@ class WorkoutFeedCell: UICollectionViewCell {
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 230 / 255, green: 230 / 255, blue: 230 / 255, alpha: 1)
+        view.backgroundColor = .systemGray4
         
         return view
     }()
@@ -81,6 +81,7 @@ class WorkoutFeedCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.text = "CLAMTOWN HOME WORKOUT - 4/26"
         titleLabel.font = .systemFont(ofSize: 15)
+        titleLabel.textColor = .label
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leadingAnchor.constraint(equalTo: coachImageView.trailingAnchor, constant: 8).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16).isActive = true

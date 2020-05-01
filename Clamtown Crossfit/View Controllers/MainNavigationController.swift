@@ -14,7 +14,7 @@ class MainNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navBarAppearance.configureWithOpaqueBackground()
-        navBarAppearance.backgroundColor = .white
+        navBarAppearance.backgroundColor = .systemGray6
         navigationBar.prefersLargeTitles = true
         navigationBar.standardAppearance = navBarAppearance
         navigationBar.scrollEdgeAppearance = navBarAppearance
