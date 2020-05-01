@@ -28,6 +28,13 @@ class PlayerViewController: UIViewController {
             configurePlayer()
         }
     }
+    var timeObserverToken: Any?
+    var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "m:ss"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
+    }()
     
     override func viewDidLoad() {
         guard let parent = self.parent else { return }
@@ -132,9 +139,37 @@ class PlayerViewController: UIViewController {
                 playPauseButton.isSelected = isPlaying
                 setupVideoControls()
                 player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+                addPeriodicTimeObserver()
 
             }
         }
+    }
+    
+    private func addPeriodicTimeObserver() {
+        // Invoke callback every half second
+        let interval = CMTime(seconds: 0.5,
+                              preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        // Add time observer. Invoke closure on the main queue.
+        timeObserverToken =
+            player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) {
+                [weak self] time in
+                // update player transport UI
+                self?.currentTimeLabel.text = self?.convertTimeToString(time: time)
+                let seconds = time.seconds
+                self?.seekSlider.value = Float(seconds)
+                
+        }
+    }
+    
+    private func convertTimeToString(time: CMTime) -> String? {
+        let seconds = CMTimeGetSeconds(time)
+        if !seconds.isNaN {
+            let secondInterval = TimeInterval(seconds)
+            let date = Date(timeIntervalSinceReferenceDate: secondInterval)
+            return dateFormatter.string(from: date)
+        }
+        
+        return nil
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -145,15 +180,13 @@ class PlayerViewController: UIViewController {
             
             if let duration = player?.currentItem?.duration {
                 let seconds = CMTimeGetSeconds(duration)
+                
                 if !seconds.isNaN {
-                    let secondsInt = Int(seconds) % 60
-                    let minutes = Int(seconds) / 60
-                    let secondsText = secondsInt > 0 ? "\(secondsInt)" : "00"
-                    
-                    let minutesText = minutes > 0 ? "\(minutes)" : "00"
-                    
-                    durationLabel.text = "\(minutesText):\(secondsText)"
+                    seekSlider.maximumValue = Float(seconds)
+                    seekSlider.minimumValue = 0
                 }
+                
+                durationLabel.text = convertTimeToString(time: duration)
                 
             }
             
@@ -195,9 +228,10 @@ class PlayerViewController: UIViewController {
     }
     
     private func setupSeekControls() {
+        seekSlider.addTarget(self, action: #selector(seek), for: .valueChanged)
         durationLabel.font = .systemFont(ofSize: 14, weight: .bold)
         durationLabel.textColor = .white
-        currentTimeLabel.font = .systemFont(ofSize: 14, weight: .bold)
+        currentTimeLabel.font = .monospacedSystemFont(ofSize: 14, weight: .bold)
         currentTimeLabel.textColor = .white
         currentTimeLabel.text = "00:00"
         videoControlsOverlayView.addSubview(currentTimeLabel)
@@ -225,5 +259,16 @@ class PlayerViewController: UIViewController {
         
         playPauseButton.isSelected.toggle()
         isPlaying.toggle()
+    }
+    
+    @objc private func seek() {
+        let value = seekSlider.value
+        
+        let time = CMTime(seconds: Double(value), preferredTimescale: 1)
+        
+        player?.seek(to: time, completionHandler: { [weak self] (completedSeek) in
+            self?.currentTimeLabel.text = self?.convertTimeToString(time: time)
+        })
+        
     }
 }
